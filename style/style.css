@@ -1,0 +1,35 @@
+body,div{
+	margin:0;
+	padding:0;
+}
+input:focus{
+	outline:none;
+}
+
+.wrap{
+	margin:10px auto;
+}
+.in,.out{
+	padding:10px;
+}
+.aside{
+	display:-webkit-box;
+	-webkit-box-pack:center;
+}
+.aside .bor{
+	width:35%;
+}
+.bor{
+	font-size:16px;
+	margin:5px;
+	padding:5px;
+	color:#999;
+	border-radius:5px;
+	border:1px solid #ccc;
+}
+.bor:focus{
+	color:#333;
+}
+.v:focus{
+	border:1px solid #999;
+}
