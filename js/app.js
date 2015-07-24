@@ -1,8 +1,8 @@
 var DefaultData = {
 	width : 200 ,
 	height : 200 ,
-	frontColor : 'FFF' ,
-	backgroundColor : '000' ,
+	frontColor : '000' ,
+	backgroundColor : 'CCC' ,
 	text : '' 
 }
 	
