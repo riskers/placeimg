@@ -1,31 +1,42 @@
-var DefaultData = {
-	width : 200 ,
-	height : 200 ,
-	frontColor : '000' ,
-	backgroundColor : 'CCC' ,
-	text : '' 
-}
-	
 var PlaceImg = {
-	"dummyimage" : "http://dummyimage.com/"
+	"placeholdit" : "http://placehold.it" ,		//http://placehold.it/350/000/fff&text=xxx
+	"dummyimage" : "http://dummyimage.com/"		//http://dummyimage.com/350x350/000/FFF&text=xxx
 }
+												
+function getData(resource,data){
+	
+	var defaultData = {
+		width : 200 ,
+		height : 200 ,
+		frontColor : '000' ,
+		backgroundColor : 'CCC' ,
+		text : '' 
+	}
 
-function dealNull(data,DefaultData){
 	for(var k in data){
 		if(!data[k]){
-			data[k] = DefaultData[k]
+			data[k] = defaultData[k]
 		}
 	}
-	return data ;
-}
 
-function getData(data){
-	var res = "http://" + "dummyimage.com" ;
-	data = dealNull(data,DefaultData) ;
-	console.log(data)
-	res += '/' + data.width + 'x' + data.height 
-	res += '/' + data.backgroundColor 
-	res += '/' + data.frontColor
+	var res = '';
+
+	if(resource=='dummyimage'){
+		res = "http://" + "dummyimage.com" ;
+		res += '/' + data.width + 'x' + data.height 
+		res += '/' + data.backgroundColor 
+		res += '/' + data.frontColor
+	}else if(resource=='placehold.it'){
+		res = 'http://placehold.it' ;
+		if(data.width==data.height){
+			res += '/' + data.width
+		}else{
+			res += '/' + data.width + '/' + data.height ;
+		}
+		
+		res += '/' + data.backgroundColor 
+		res += '/' + data.frontColor
+	}
 	if(data.text!=''){
 		res += '&text=' + data.text
 	}
@@ -50,9 +61,14 @@ window.onload = function(){
 				break ;
 			}
 		}
+	}else{
+		localStorage.setItem('resource','dummyimage') ;
 	}
 
 	oInput.addEventListener('keyup',function(e){
+
+		var resource = localStorage.getItem('resource')
+
 		var target = e.target ;
 		if(target.tagName=='INPUT'){
 			inputData = {
@@ -62,8 +78,8 @@ window.onload = function(){
 				backgroundColor : aInput[3].value ,
 				text : aInput[4].value 
 			} ;
-			oOutput.value = getData(inputData) ;
-			console.log(getData(inputData))
+			oOutput.value = getData(resource,inputData) ;
+			//console.log(getData(resource,inputData))
 		}
 	},false)
 
