@@ -1,28 +1,45 @@
-body,div{
+body,div,input,select{
 	margin:0;
 	padding:0;
 }
-input:focus{
+input:focus,select:focus{
 	outline:none;
 }
 
+::selection{
+	color:#FFF;
+	background-color:#666;
+}
+
 .wrap{
+	width:200px;
 	margin:10px auto;
 }
 .in,.out{
 	padding:10px;
 }
-.aside{
-	display:-webkit-box;
-	-webkit-box-pack:center;
+.out{
+	border-top:1px solid #EEE;
 }
-.aside .bor{
-	width:35%;
+#sel{
+	width:100%;
+	padding:5px;
+	height:30px;
+	line-height:30px;
+	box-sizing:border-box;
+	margin-bottom:5px;
+}
+#sel option{
+	width:100%;
+	height:20px;
+	line-height:20px;
 }
 .bor{
 	font-size:16px;
-	margin:5px;
+	margin:5px 0;
+	width:100%;
 	padding:5px;
+	box-sizing:border-box;
 	color:#999;
 	border-radius:5px;
 	border:1px solid #ccc;

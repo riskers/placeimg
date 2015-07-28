@@ -26,8 +26,10 @@ function getData(data){
 	res += '/' + data.width + 'x' + data.height 
 	res += '/' + data.backgroundColor 
 	res += '/' + data.frontColor
-	res += '&text=' + data.text
-	console.log(res)
+	if(data.text!=''){
+		res += '&text=' + data.text
+	}
+	
 	return  res ;
 }
 
@@ -37,7 +39,19 @@ window.onload = function(){
 
 	var aInput = oInput.querySelectorAll('.v') ,
 		inputData = {} ;
+
+	var oSel = document.getElementById('sel') ;
 	
+	if(localStorage.getItem('resource')){
+		var aOption = oSel.getElementsByTagName('option') ;
+		for(var i=0;i<aOption.length;i++){
+			if( aOption[i].value == localStorage.getItem('resource') ){
+				aOption[i].selected = true 
+				break ;
+			}
+		}
+	}
+
 	oInput.addEventListener('keyup',function(e){
 		var target = e.target ;
 		if(target.tagName=='INPUT'){
@@ -48,15 +62,26 @@ window.onload = function(){
 				backgroundColor : aInput[3].value ,
 				text : aInput[4].value 
 			} ;
-
 			oOutput.value = getData(inputData) ;
+			console.log(getData(inputData))
 		}
 	},false)
 
-	
+	oInput.addEventListener('keypress',function(e){
+		if(e.keyCode==13){
+			oOutput.focus()
+			oOutput.select()
+		}
+	})
+
 	oOutput.addEventListener('click',function(){
 		this.select();
 		return false;
+	})
+
+	oSel.addEventListener('change',function(){
+		var resource = this.value
+		localStorage.setItem('resource',resource)
 	})
 
 }
