@@ -1,7 +1,13 @@
-var PlaceImg = {
+/*
+{
 	"placeholdit" : "http://placehold.it" ,		//http://placehold.it/350/000/fff&text=xxx
-	"dummyimage" : "http://dummyimage.com/"		//http://dummyimage.com/350x350/000/FFF&text=xxx
+	"dummyimage" : "http://dummyimage.com/"	,	//http://dummyimage.com/350x350/000/FFF&text=xxx
+	"fake" : "http://fakeimg.pl"		//http://fakeimg.pl/350x200/?text=World&font=lobster
+	"kitten" : 'http://placekitten.com/' 	//http://placekitten.com/g/500/300
+	"FPOImg" : "http://fpoimg.com"		//http://fpoimg.com/350x200
+	"lore" : "http://lorempixel.com/"		//http://lorempixel.com/350/200
 }
+*/
 												
 function getData(resource,data){
 	
@@ -26,6 +32,9 @@ function getData(resource,data){
 		res += '/' + data.width + 'x' + data.height 
 		res += '/' + data.backgroundColor 
 		res += '/' + data.frontColor
+		if(data.text!=''){
+			res += '&text=' + data.text
+		}
 	}else if(resource=='placehold.it'){
 		res = 'http://placehold.it' ;
 		if(data.width==data.height){
@@ -33,14 +42,30 @@ function getData(resource,data){
 		}else{
 			res += '/' + data.width + '/' + data.height ;
 		}
-		
 		res += '/' + data.backgroundColor 
 		res += '/' + data.frontColor
+		if(data.text!=''){
+			res += '&text=' + data.text
+		}
+	}else if(resource=='fake'){
+		res = 'http://fakeimg.pl'
+		res += '/' + data.width + 'x' + data.height  
+		res += '/' + data.backgroundColor 
+		res += '/' + data.frontColor
+		if(data.text!=''){
+			res += '?text=' + data.text
+		}
+	}else if(resource=='kitten'){
+		res = 'http://placekitten.com/g' 
+		res += '/' + data.width + '/' + data.height
+	}else if(resource =='FPO'){
+		res = 'http://fpoimg.com'
+		res += '/' + data.width + 'x' + data.height  
+	}else if(resource=='lore'){
+		res = 'http://lorempixel.com/'
+		res += '/' + data.width + '/' + data.height
 	}
-	if(data.text!=''){
-		res += '&text=' + data.text
-	}
-	
+
 	return  res ;
 }
 
@@ -52,17 +77,22 @@ window.onload = function(){
 		inputData = {} ;
 
 	var oSel = document.getElementById('sel') ;
+
+	var oAside = document.querySelector('.aside') ;
 	
 	if(localStorage.getItem('resource')){
 		var aOption = oSel.getElementsByTagName('option') ;
 		for(var i=0;i<aOption.length;i++){
 			if( aOption[i].value == localStorage.getItem('resource') ){
 				aOption[i].selected = true 
+				if(i<=2){
+					oAside.style.display = 'block'
+				}else{
+					oAside.style.display = 'none'
+				}
 				break ;
 			}
 		}
-	}else{
-		localStorage.setItem('resource','dummyimage') ;
 	}
 
 	oInput.addEventListener('keyup',function(e){
@@ -96,8 +126,14 @@ window.onload = function(){
 	})
 
 	oSel.addEventListener('change',function(){
-		var resource = this.value
+		var resource = this.value ,
+			index = this.selectedIndex
 		localStorage.setItem('resource',resource)
+		if(index<=2){
+			oAside.style.display = 'block'
+		}else{
+			oAside.style.display = 'none'
+		}
 	})
 
 }

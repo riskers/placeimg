@@ -28,6 +28,7 @@ input:focus,select:focus{
 	line-height:30px;
 	box-sizing:border-box;
 	margin-bottom:5px;
+	border-radius:5px;
 }
 #sel option{
 	width:100%;
@@ -49,4 +50,7 @@ input:focus,select:focus{
 }
 .v:focus{
 	border:1px solid #999;
+}
+.aside{
+	
 }
