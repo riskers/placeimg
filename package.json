@@ -1,0 +1,24 @@
+{
+  "name": "placeimg",
+  "version": "1.0.0",
+  "description": "placeimg",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-connect": "^2.2.0",
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/riskers/placeimg.git"
+  },
+  "author": "riskers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riskers/placeimg/issues"
+  },
+  "homepage": "https://github.com/riskers/placeimg"
+}
